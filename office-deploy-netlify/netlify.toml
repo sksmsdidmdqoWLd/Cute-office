@@ -1,0 +1,20 @@
+# Netlify 설정 파일
+# 이 파일이 있으면, Netlify가 알아서 화면을 만들고 서버 함수도 같이 올려줘요.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+# 화면 코드가 부르는 /api/mailbox/... 주소를
+# Netlify Functions(/.netlify/functions/...)로 그대로 연결해줘요.
+# 그래서 화면 코드는 Vercel 버전과 똑같이 /api/mailbox/... 를 부르면 돼요.
+[[redirects]]
+  from = "/api/mailbox/messages"
+  to = "/.netlify/functions/mailbox-messages"
+  status = 200
+
+[[redirects]]
+  from = "/api/mailbox/send"
+  to = "/.netlify/functions/mailbox-send"
+  status = 200
